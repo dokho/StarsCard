@@ -1,64 +1,97 @@
 ---
 name: stars-card-design
-description: Design original sports trading cards and reusable card-style systems for baseball, basketball, football, and other athletes. Use when a user asks for 球星卡, sports cards, player cards, card templates, card style research, AI image prompts for cards, rarity variants, or improvements to an existing sports-card generator. Do not use for card pricing, grading, authentication, or investment advice.
+description: Create finished, standard-size sports trading cards from a user-provided athlete photo and player information. Use when a user asks to 制作球星卡, generate a player card, turn a photo into a sports card, choose a card style, create a front/back card, design card templates, or build a reusable sports-card style system. Do not use for card pricing, grading, authentication, or investment advice.
 ---
 
 # Stars Card Design
 
-Create sports-card directions that feel collectible, readable, and specific to the athlete's story without copying an existing commercial card.
+Guide the user from an athlete photo to a finished, original sports card. Collect only the information needed at each stage, confirm the design once, then produce the card instead of stopping at a prompt or concept.
 
-## Establish the brief
+## Workflow
 
-Infer reasonable defaults when details are missing. Identify:
+### 1. Collect the source photo and player data
 
-- sport and athlete level;
-- intended use: personal keepsake, team set, social share, print, or product template;
-- available assets: portrait/action photo, team colors, logo, statistics, signature, and event details;
-- desired orientation and output size;
-- whether the user needs concepts, prompts, a visual specification, or implementation guidance.
+If the user has not attached an athlete photo, ask them to upload one. The photo is required for a finished card. Request the following information in the same message so the user can answer once:
 
-Use fictional placeholders when the user has not provided licensed names, photos, logos, or league assets.
+- player name — required;
+- jersey number — required;
+- playing position — required;
+- team name — optional;
+- team logo image — optional.
 
-## Build the direction
+Accept details already present in the conversation without asking again. Do not require team name or logo. If no logo is supplied, omit it or use a simple typographic team monogram derived from a provided team name; never invent an official-looking logo.
 
-Define every card as three independent decisions:
+Inspect the uploaded photo before proposing styles. Note the crop, pose, direction of movement, background quality, resolution, and whether the face is clear. Warn briefly if the source is too small, heavily blurred, obstructed, or lacks enough body area for the requested layout, and request a better photo only when the current one cannot produce an acceptable result.
 
-1. **Skeleton** — photo-led, competitive badge, archival retro, hero illustration, or honor edition.
-2. **Finish** — uncoated, chrome, spectrum, matte, acetate, canvas, or foil.
-3. **Story** — debut, home city, championship, clutch play, team identity, or milestone.
+### 2. Let the user choose the design
 
-Read [references/style-system.md](references/style-system.md) when selecting or comparing visual archetypes, constructing a rarity ladder, or writing generation prompts.
+After the required photo and player data are available, offer a compact set of suitable choices based on the actual image. Include:
 
-Prefer one strong concept over a mixture of unrelated effects. Give each direction a short original name and a one-sentence creative premise. Explain how composition, typography, palette, material, and information hierarchy support that premise.
+- 3–6 style choices, each with a one-line visual description;
+- portrait or landscape;
+- front only or front and back.
 
-## Preserve card usability
+Use original generic style names. Good defaults are:
 
-- Keep the athlete recognizable at thumbnail size.
-- Reserve a quiet, high-contrast zone for the athlete name.
-- Treat number, position, team, season, and card code as structured information rather than decoration.
-- Keep essential marks inside a safe area suitable for print trimming.
-- Use landscape only when the action, multiple athletes, or a panoramic story benefits from it.
-- Make rarity legible through structure or finish, not color alone.
-- When implementation is requested, keep player data separate from the visual template so a series can be generated consistently.
+- **赛场瞬间** — full-bleed photography with restrained match graphics;
+- **锋芒竞技** — sharp geometry, team-color light, metallic depth;
+- **复古档案** — warm paper, limited inks, season-record typography;
+- **城市主场** — player plus original local symbols and fan culture;
+- **热血英雄** — original comic illustration and strong motion energy;
+- **荣耀典藏** — premium spacing, ceremonial symmetry, restrained foil.
 
-## Make the result original
+Read [references/style-system.md](references/style-system.md) when the user requests more styles, comparisons, rarity variants, or a reusable template system.
 
-Learn from broad conventions such as full-bleed photography, metallic diffraction, archival typography, illustrated local storytelling, and memorabilia windows. Do not reproduce a recognizable border, proprietary pattern, insert name, logo placement, or complete composition from Topps, Panini, Upper Deck, a league, or a team.
+If the user selects a card back, ask only for missing back-specific content that materially matters: a short bio, season statistics, achievement, motto, or social/contact field. These fields are optional. Never fabricate statistics, awards, dates, or biographical facts; a back can use identity data, decorative structure, and clearly labeled empty/omitted fields.
 
-Do not fabricate authenticated autographs, game-used memorabilia, serial numbering, or licensing claims. Describe decorative handwriting and digital memorabilia honestly. Keep user-provided trademarks confined to the authorized project.
+### 3. Confirm once
 
-## Deliverables
+Before generating, summarize the exact choices in a compact production brief:
 
-Match the response to the request. A complete design direction normally includes:
+- player name / number / position;
+- team and logo usage;
+- chosen style;
+- portrait or landscape;
+- front only or front and back;
+- any optional back content.
 
-- creative premise;
-- front layout and information hierarchy;
-- palette and typography roles;
-- finish/material behavior;
-- front and back content fields;
-- base and rare-variant rules;
-- accessibility and small-size checks;
-- an image-generation prompt when useful;
-- a short originality and rights note.
+Ask for confirmation only when the user has not already clearly approved all choices. Do not repeatedly reconfirm details after production starts.
 
-For a reusable product system, also provide stable design tokens and explain which properties may vary per athlete without breaking series consistency.
+### 4. Produce the card
+
+Read [references/production-workflow.md](references/production-workflow.md) before creating final artwork.
+
+Use the athlete photo as a reference and preserve recognizable facial features, body proportions, uniform details, skin tone, and jersey number unless the user explicitly asks for stylization. Build the visual artwork first, then place exact text and the supplied logo in a deterministic layout step. Do not rely on an image generator to spell the player name, number, position, statistics, or team name.
+
+Use a standard 2.5 × 3.5 inch trading-card trim size:
+
+- portrait master: **1500 × 2100 px**;
+- landscape master: **2100 × 1500 px**.
+
+For print-ready output, also support a 0.125 inch bleed on every side at 600 ppi:
+
+- portrait with bleed: **1650 × 2250 px**;
+- landscape with bleed: **2250 × 1650 px**.
+
+Keep essential faces, names, numbers, and logos inside the safe area defined in the production reference. When a back is requested, create a separate file at the same orientation and dimensions, plus a side-by-side preview when practical.
+
+### 5. Verify and deliver
+
+Before presenting the result, visually check:
+
+- likeness and face integrity;
+- exact spelling of every supplied field;
+- correct number and position;
+- logo aspect ratio and legibility;
+- orientation and pixel dimensions;
+- text contrast and safe margins;
+- front/back consistency;
+- absence of unintended trademarks or fake certification claims.
+
+Deliver the final PNG file or files inline when the environment supports it. State the dimensions and identify front/back clearly. If a requested generation or editing tool is unavailable, provide a production-ready prompt and layout specification, explicitly noting that no final bitmap was produced.
+
+## Originality and rights
+
+Learn from broad card conventions without recreating recognizable commercial borders, proprietary patterns, insert names, logo placements, or complete compositions. Keep user-provided trademarks confined to the authorized card.
+
+Do not fabricate authenticated autographs, game-used memorabilia, serial numbering, or licensing claims. Decorative handwriting and digital keepsake windows must be described honestly.
