@@ -7,6 +7,12 @@ description: Create finished, standard-size sports trading cards from a user-pro
 
 Guide the user from an athlete photo to a finished, original sports card. Collect only the information needed at each stage, confirm the design once, then produce the card instead of stopping at a prompt or concept.
 
+## Runtime compatibility
+
+Keep the workflow tool-neutral. Use the image generation, reference-image editing, file handling, and deterministic layout capabilities available in the current host instead of assuming a specific vendor or tool name.
+
+When running in 豆包、火山方舟、扣子、ArkClaw, or another Volcengine agent environment, read [references/doubao-volcengine.md](references/doubao-volcengine.md) before generating artwork. Do not ask the user to paste an API key into chat; use only tools and credentials already configured by the host.
+
 ## Workflow
 
 ### 1. Collect the source photo and player data
