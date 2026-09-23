@@ -27,7 +27,8 @@ Inspect the uploaded photo before proposing styles. Note the crop, pose, directi
 
 After the required photo and player data are available, offer a compact set of suitable choices based on the actual image. Include:
 
-- 3–6 style choices, each with a one-line visual description;
+- 6 recommended style choices, each with a one-line visual description;
+- an explicit “查看更多风格” option that opens the full catalog;
 - portrait or landscape;
 - front only or front and back.
 
@@ -40,7 +41,11 @@ Use original generic style names. Good defaults are:
 - **热血英雄** — original comic illustration and strong motion energy;
 - **荣耀典藏** — premium spacing, ceremonial symmetry, restrained foil.
 
-Read [references/style-system.md](references/style-system.md) when the user requests more styles, comparisons, rarity variants, or a reusable template system.
+Style names are selection labels only. Never print the selected style name on the finished front or back unless the user explicitly requests it as visible copy.
+
+Read [references/style-catalog.md](references/style-catalog.md) before recommending styles. Match recommendations to the photo, sport, age group, and intended mood instead of always showing the same six defaults. If the user asks for more choices, show the full catalog grouped by category; do not make them repeatedly ask for another batch.
+
+Read [references/style-system.md](references/style-system.md) when the user requests comparisons, rarity variants, prompt details, or a reusable template system.
 
 If the user selects a card back, ask only for missing back-specific content that materially matters: a short bio, season statistics, achievement, motto, or social/contact field. These fields are optional. Never fabricate statistics, awards, dates, or biographical facts; a back can use identity data, decorative structure, and clearly labeled empty/omitted fields.
 
@@ -75,6 +80,8 @@ For print-ready output, also support a 0.125 inch bleed on every side at 600 ppi
 
 Keep essential faces, names, numbers, and logos inside the safe area defined in the production reference. When a back is requested, create a separate file at the same orientation and dimensions, plus a side-by-side preview when practical.
 
+Keep the back visually neutral and shared across style variants. Do not echo the front's distinctive frame, finish, illustration language, style name, or rarity treatment on the back. A viewer should not be able to identify which front style is paired with the card by looking at the back alone. When several front variants belong to the same player or set, reuse one common back unless the user explicitly requests variant-specific backs.
+
 ### 5. Verify and deliver
 
 Before presenting the result, visually check:
@@ -86,6 +93,8 @@ Before presenting the result, visually check:
 - orientation and pixel dimensions;
 - text contrast and safe margins;
 - front/back consistency;
+- no visible style-selection label on either side;
+- back remains neutral and does not reveal the front variant;
 - absence of unintended trademarks or fake certification claims.
 
 Deliver the final PNG file or files inline when the environment supports it. State the dimensions and identify front/back clearly. If a requested generation or editing tool is unavailable, provide a production-ready prompt and layout specification, explicitly noting that no final bitmap was produced.

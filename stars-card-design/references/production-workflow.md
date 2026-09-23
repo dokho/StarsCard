@@ -71,6 +71,8 @@ Offer only choices that suit the source. The user may also describe a custom sty
 
 Generate or edit the athlete and visual background with the uploaded photo as the identity reference. The artwork should include intentional quiet zones for later text. Avoid generated typography, numbers, logos, signatures, statistics, QR codes, and fine print.
 
+Translate the selected style into visual characteristics, then remove the selection label from the image prompt's visible-copy list. State explicitly that the internal style name must not be rendered. Do not add decorative slogans unless the user supplied or approved them.
+
 Do not casually change uniform colors or equipment. When a supplied uniform contains marks the user did not ask to reproduce, preserve only what is necessary for faithful personal depiction and avoid adding new third-party branding.
 
 ### Stage B — deterministic layout
@@ -86,6 +88,8 @@ Composite these elements after artwork generation:
 - all back text and statistics.
 
 Use a real text/layout tool for this stage. Do not use generative pixels for exact text. Preserve the logo's aspect ratio and do not recolor it unless the user asks.
+
+Do not place internal style-selection names such as 赛场瞬间, 锋芒竞技, 复古档案, 城市主场, 热血英雄, or 荣耀典藏 on the exported card. They describe how to design the card; they are not card copy.
 
 ## Canvas, bleed, and safe area
 
@@ -113,15 +117,17 @@ Optional information:
 
 5. team name;
 6. team logo;
-7. year, card code, style title, or rarity label.
+7. year, card code, or rarity label when explicitly requested.
 
 Use at most two prominent text levels. The player should remain recognizable at a 240 px-tall thumbnail.
 
 ## Back layout
 
-Use the back to add meaning instead of mirroring the front. A useful hierarchy is:
+Use one simple, neutral back design across all front styles for the same set. The back must not reveal whether the front is modern, retro, comic, premium, or another variant. Do not repeat the front style's title, signature frame, foil/chrome treatment, illustration motif, rarity effect, or distinctive palette behavior.
 
-1. small player portrait, monogram, or style emblem;
+Prefer a restrained team-adjacent palette, flat background, thin border, generous whitespace, and conventional information hierarchy. A useful hierarchy is:
+
+1. small player portrait or neutral monogram;
 2. player identity line;
 3. biography, achievement, or motto;
 4. user-supplied statistics table;
@@ -129,6 +135,8 @@ Use the back to add meaning instead of mirroring the front. A useful hierarchy i
 6. small note such as “Personal commemorative card” when appropriate.
 
 Never invent missing statistics. Omit empty sections rather than displaying fake placeholder values in a final card.
+
+When generating multiple front variants, generate the common back once and reuse the same file for every variant. Create variant-specific backs only when the user explicitly asks for them.
 
 ## File naming
 
@@ -151,5 +159,6 @@ Check the exported pixels, not only the source document:
 - no generated text artifacts remain in the art layer;
 - exact agreement with user-supplied spelling and numbers;
 - sufficient contrast in light and dark regions;
-- consistent corner, border, palette, and typography across both sides;
+- no style-selection name printed on the front or back;
+- back is simple, neutral, and reusable across front variants;
 - no claim of official licensing, autograph authentication, or game-used material.
