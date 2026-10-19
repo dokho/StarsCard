@@ -1,0 +1,10 @@
+{
+  "trim_mm": [63.5, 88.9],
+  "bleed_mm": 3,
+  "target_ppi": 300,
+  "common_back": "./art/team-back-bleed.png",
+  "cards": [
+    {"id": "card-001", "front": "./art/card-001-front-bleed.png"},
+    {"id": "card-002", "front": "./art/card-002-front-bleed.png", "back": "./art/other-team-back-bleed.png"}
+  ]
+}

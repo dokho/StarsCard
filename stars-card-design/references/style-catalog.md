@@ -2,7 +2,7 @@
 
 Use this catalog when recommending or expanding card-style choices. Style names are UI labels only and must not appear on the exported card unless the user explicitly requests visible style copy.
 
-Recommend six styles that fit the source photo. Always offer “查看更多风格” so the user can see this complete catalog without requesting repeated refreshes.
+When the user wants recommendations, suggest a compact selection that fits the photo and offer “查看更多风格” to open this catalog. If the user has specified a style or delegated the choice, proceed with that choice or a stated assumption; do not force another selection or confirmation step. The main skill's photo-fidelity and fact-source rules apply to every style, including illustration styles.
 
 ## 写实竞技
 

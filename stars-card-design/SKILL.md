@@ -1,112 +1,55 @@
 ---
 name: stars-card-design
-description: Create finished, standard-size sports trading cards from a user-provided athlete photo and player information. Use when a user asks to 制作球星卡, generate a player card, turn a photo into a sports card, choose a card style, create a front/back card, design card templates, or build a reusable sports-card style system. Do not use for card pricing, grading, authentication, or investment advice.
+description: 用真实照片制作单人、团队或多时期球星卡，支持复古、杂志、镭射风格及出血裁切、A4 拼版。用于球星卡设计与制卡；按当前 AI 的图像和文件能力执行，不虚构球员资料。
 ---
 
-# Stars Card Design
+# 球星卡制作
 
-Guide the user from an athlete photo to a finished, original sports card. Collect only the information needed at each stage, confirm the design once, then produce the card instead of stopping at a prompt or concept.
+把用户照片制作成具有收藏卡语言的正反面，并按实际用途交付可复现的设计文件与印刷文件。仅做设计时不要强行增加印刷工序；需要印刷时必须区分成品、含出血稿和带裁切线拼版。
 
-## Runtime compatibility
+## 跨工具执行
 
-Keep the workflow tool-neutral. Use the image generation, reference-image editing, file handling, and deterministic layout capabilities available in the current host instead of assuming a specific vendor or tool name.
+本文件采用通用 `SKILL.md` 结构。先读 [能力适配](references/capabilities.md)，按实际可用的看图、参考图编辑、原图排版、文件读写和代码执行能力工作，不假定存在某一厂商的工具名、API、账号或宿主界面。
 
-When running in 豆包、火山方舟、扣子、ArkClaw, or another Volcengine agent environment, read [references/doubao-volcengine.md](references/doubao-volcengine.md) before generating artwork. Do not ask the user to paste an API key into chat; use only tools and credentials already configured by the host.
+能生成图像就交付并检查实际图像；只有文本能力就交付标明用途的设计说明与可复制提示词；能运行脚本且依赖具备时才生成拼版文件。只有用户允许导出/上传到外部服务时才传素材，不因安装技能就认定已授权连接或付费调用。宿主的规则和实际权限始终有效。
 
-## Workflow
+只支持普通聊天的工具可以使用包内生成的“通用制卡指令.md”；它合并了必要正文，避免仅粘贴入口后引用不到其余文件。`agents/openai.yaml` 只是可选界面元数据，不是通用运行依赖。各工具安装入口见 [跨工具使用说明](references/platforms.md)。
 
-### 1. Collect the source photo and player data
+本仓库继续使用 `stars-card-design` 名称，整合原有风格目录与本次完整制卡流程。用户要推荐或更多风格时读取 [完整风格库](references/style-catalog.md)；需要对比、模板或材质变体时读取 [风格系统](references/style-system.md)。风格名是选择标签，除非用户明确要求，不能印在卡面上。在豆包/火山引擎环境中需要具体能力映射时，读取 [豆包适配](references/doubao-volcengine.md)。
 
-If the user has not attached an athlete photo, ask them to upload one. The photo is required for a finished card. Request the following information in the same message so the user can answer once:
+## 已知偏好与适用范围
 
-- player name — required;
-- jersey number — required;
-- playing position — required;
-- team name — optional;
-- team logo image — optional.
+以下默认来自本次任务附带的聊天预览；读取 [偏好来源](references/preferences.md) 区分用户确认、当前要求与制作假设。
 
-Accept details already present in the conversation without asking again. Do not require team name or logo. If no logo is supplied, omit it or use a simple typographic team monogram derived from a provided team name; never invent an official-looking logo.
+- 背景不出现额外人物、观众、人像剪影或球员复制影像。
+- 不出现“成长轨迹”文字；多时期可以通过真实照片和用户确认的时期标识表达。
+- 人物形象以用户认可的原照片/已批准版本为基准，保留身份特征。
+- 要像球星卡：有边框、姓名区、球队标识位、卡片编号体系及适量收藏卡装饰；不要做成宣传海报。
+- 支持镭射版本，但不能把用户曾要求过镭射理解为所有新任务只用镭射。
 
-Inspect the uploaded photo before proposing styles. Note the crop, pose, direction of movement, background quality, resolution, and whether the face is clear. Warn briefly if the source is too small, heavily blurred, obstructed, or lacks enough body area for the requested layout, and request a better photo only when the current one cannot produce an acceptable result.
+用户本次明确选择优先于这些默认值。禁止从示例或参考图推断球员姓名、队伍、号码、年龄、荣誉、数据或年份。未知事实留空或省略；设计编号必须注明是自定义编号，不能伪装官方发行或限量认证。
 
-### 2. Let the user choose the design
+## 开始工作
 
-After the required photo and player data are available, offer a compact set of suitable choices based on the actual image. Include:
+1. 读取 [输入规范](references/input-spec.md)，使用 `assets/intake.template.json` 整理照片、事实来源、卡型、风格、背面和交付方式。先复用已提供资料；只询问会阻断人物识别、配对或制作的缺失项。
+2. 有照片先看图。没有可用人物照片时，可完成版式、通用背面和待填字段，但不能声称已完成保真人像卡。不要从旧聊天预览声称拿到了原图。
+3. 对照 [照片保真](references/photo-fidelity.md) 确定原照片抠图排版或局部编辑路线；人物和文字不依赖整卡随机生成。
+4. 根据卡型和风格读取 [设计规则与提示词](references/design-styles.md)。先确定正面主体、收藏卡层级和共同背面，再扩展系列。只做用户要求的款数；用户未要求审批关卡时，先做可审阅成果并自行完成检查。
+5. 需要印刷时读取 [印刷与对位](references/print-production.md)，以印厂模板覆盖制作假设。需要 A4 拼版时读取 [拼版工具](references/tooling.md)。工具负责几何，不负责人物审核或 CMYK 印前认证。
+6. 按 [交付与质检](references/delivery-qa.md) 检查所有交付物；报告已完成、限制和待确认项，不能把数字效果图标为真实镭射工艺文件。
 
-- 6 recommended style choices, each with a one-line visual description;
-- an explicit “查看更多风格” option that opens the full catalog;
-- portrait or landscape;
-- front only or front and back.
+## 关键执行约束
 
-Use original generic style names. Good defaults are:
+- 单人卡只有一个主体；团队卡保留用户合照中的全部成员与原有关系，不将其他成员当作“背景人物”删除；多时期卡允许同一个人不同真实时期的照片作为明确主体面板。三者都不新增、复制背景人物。时期归属不明确时按用户的照片顺序暂排，省略年份。
+- 默认中文沟通，姓名和队名保留用户给出的原文；不要自行翻译姓名或把不存在的资料填满。
+- 用当前环境可用的图像编辑能力处理图像；如有专门的图像编辑技能/工具，按其规则调用。未获得更换人脸授权时，不重绘脸、身体、队服号码或 Logo。没有保真编辑能力就采用原图裁切/遮罩排版。
+- 文本、Logo、边框、工艺蒙版尽量独立可编辑；小字在精确排版阶段叠加。用户提供 Logo 优先使用原始矢量/透明文件；缺失时用无品牌抽象纹理做待补背面，不能猜造真实球队标志。
+- 同队/同系列通用背面默认克制、独立于正面风格，不暴露某个正面变体的材质、风格名或稀有度。用户明确要求个人资料背面或变体专属背面时才调整。
+- 竖版成品默认 63.5 × 88.9 mm，横版交换宽高为 88.9 × 63.5 mm；含四周 3 mm 出血后分别为 69.5 × 94.9 mm、94.9 × 69.5 mm。重要信息默认距裁切边 5 mm。这是制作默认值，非所有印厂统一标准；横版设计不代表现有 A4 纵向 2×2 脚本自动兼容横卡。
+- 同页粘贴版与双面版是两种交付，不能混用。粘贴版正反面并排、都正读，裁开后白背相贴；双面版按翻边方式重排背面位置，不镜像文字或 Logo。
+- 默认 300 ppi 是有效像素检查目标；仅修改 DPI 标签或放大插值不能称作新增真实细节。
+- 没有印厂 ICC、纸张及工艺要求时，交付带色彩说明的桌面打样版；不能声称完成生产级 CMYK / PDF/X 或已验证印刷机对位。
 
-- **赛场瞬间** — full-bleed photography with restrained match graphics;
-- **锋芒竞技** — sharp geometry, team-color light, metallic depth;
-- **复古档案** — warm paper, limited inks, season-record typography;
-- **城市主场** — player plus original local symbols and fan culture;
-- **热血英雄** — original comic illustration and strong motion energy;
-- **荣耀典藏** — premium spacing, ceremonial symmetry, restrained foil.
+## 最小交付回复
 
-Style names are selection labels only. Never print the selected style name on the finished front or back unless the user explicitly requests it as visible copy.
-
-Read [references/style-catalog.md](references/style-catalog.md) before recommending styles. Match recommendations to the photo, sport, age group, and intended mood instead of always showing the same six defaults. If the user asks for more choices, show the full catalog grouped by category; do not make them repeatedly ask for another batch.
-
-Read [references/style-system.md](references/style-system.md) when the user requests comparisons, rarity variants, prompt details, or a reusable template system.
-
-If the user selects a card back, ask only for missing back-specific content that materially matters: a short bio, season statistics, achievement, motto, or social/contact field. These fields are optional. Never fabricate statistics, awards, dates, or biographical facts; a back can use identity data, decorative structure, and clearly labeled empty/omitted fields.
-
-### 3. Confirm once
-
-Before generating, summarize the exact choices in a compact production brief:
-
-- player name / number / position;
-- team and logo usage;
-- chosen style;
-- portrait or landscape;
-- front only or front and back;
-- any optional back content.
-
-Ask for confirmation only when the user has not already clearly approved all choices. Do not repeatedly reconfirm details after production starts.
-
-### 4. Produce the card
-
-Read [references/production-workflow.md](references/production-workflow.md) before creating final artwork.
-
-Use the athlete photo as a reference and preserve recognizable facial features, body proportions, uniform details, skin tone, and jersey number unless the user explicitly asks for stylization. Build the visual artwork first, then place exact text and the supplied logo in a deterministic layout step. Do not rely on an image generator to spell the player name, number, position, statistics, or team name.
-
-Use a standard 2.5 × 3.5 inch trading-card trim size:
-
-- portrait master: **1500 × 2100 px**;
-- landscape master: **2100 × 1500 px**.
-
-For print-ready output, also support a 0.125 inch bleed on every side at 600 ppi:
-
-- portrait with bleed: **1650 × 2250 px**;
-- landscape with bleed: **2250 × 1650 px**.
-
-Keep essential faces, names, numbers, and logos inside the safe area defined in the production reference. When a back is requested, create a separate file at the same orientation and dimensions, plus a side-by-side preview when practical.
-
-Keep the back visually neutral and shared across style variants. Do not echo the front's distinctive frame, finish, illustration language, style name, or rarity treatment on the back. A viewer should not be able to identify which front style is paired with the card by looking at the back alone. When several front variants belong to the same player or set, reuse one common back unless the user explicitly requests variant-specific backs.
-
-### 5. Verify and deliver
-
-Before presenting the result, visually check:
-
-- likeness and face integrity;
-- exact spelling of every supplied field;
-- correct number and position;
-- logo aspect ratio and legibility;
-- orientation and pixel dimensions;
-- text contrast and safe margins;
-- front/back consistency;
-- no visible style-selection label on either side;
-- back remains neutral and does not reveal the front variant;
-- absence of unintended trademarks or fake certification claims.
-
-Deliver the final PNG file or files inline when the environment supports it. State the dimensions and identify front/back clearly. If a requested generation or editing tool is unavailable, provide a production-ready prompt and layout specification, explicitly noting that no final bitmap was produced.
-
-## Originality and rights
-
-Learn from broad card conventions without recreating recognizable commercial borders, proprietary patterns, insert names, logo placements, or complete compositions. Keep user-provided trademarks confined to the authorized card.
-
-Do not fabricate authenticated autographs, game-used memorabilia, serial numbering, or licensing claims. Decorative handwriting and digital keepsake windows must be described honestly.
+给出可点击的设计/文件入口，简述采用的卡型、风格、人物保真方式和印刷规格；明确哪些内容仍是空缺事实、待放置 Logo 或待印厂确认。完整清单写在交付说明中，不在聊天里重复所有技术细节。

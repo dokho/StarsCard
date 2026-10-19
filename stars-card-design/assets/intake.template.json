@@ -1,0 +1,42 @@
+{
+  "project_id": "custom-card-project",
+  "language": "zh-CN",
+  "card_type": "single",
+  "style": null,
+  "photos": [],
+  "facts": {
+    "name": {"value": null, "source": null},
+    "team": {"value": null, "source": null},
+    "jersey_number": {"value": null, "source": null},
+    "position": {"value": null, "source": null},
+    "season": {"value": null, "source": null},
+    "statistics": {"value": null, "source": null},
+    "awards": {"value": null, "source": null}
+  },
+  "design": {
+    "orientation": "portrait",
+    "catalog_id": null,
+    "catalog_id_is_custom": true,
+    "background_people": false,
+    "excluded_text": ["成长轨迹"],
+    "identity_policy": "preserve-source",
+    "approved_reference_path": null
+  },
+  "back": {
+    "mode": "team_common",
+    "team_logo_path": null,
+    "team_logo_source": null,
+    "confirmed_team": null
+  },
+  "delivery_modes": ["design"],
+  "production": {
+    "trim_mm": [63.5, 88.9],
+    "bleed_mm": 3,
+    "safe_mm": 5,
+    "target_ppi": 300,
+    "duplex_flip": "long",
+    "finish": "digital_simulation",
+    "printer_icc_path": null,
+    "printer_template_path": null
+  }
+}

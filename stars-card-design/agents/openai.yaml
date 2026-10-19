@@ -1,4 +1,4 @@
 interface:
   display_name: "球星卡制作"
-  short_description: "从球员照片和资料生成标准尺寸、可带正反面的原创球星卡"
-  default_prompt: "Use $stars-card-design to turn my athlete photo and player information into a finished sports card."
+  short_description: "真实照片球星卡设计、人物保真、球队背面与 A4 出血裁切拼版"
+  default_prompt: "使用 $stars-card-design，根据我提供的真实照片制作球星卡，保留人物特征，省略未知资料，并按指定风格和印刷方式交付。"
